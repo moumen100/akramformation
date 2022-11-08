@@ -1,0 +1,58 @@
+
+<form  id="add-sport">
+        <fieldset>
+        <div class="Nom">
+<label for="">Nom du Sport a Ajouter:</label>
+<input type="text" name="nom" id="nom_sport">
+        </div>
+        <label for="">Description du sport:</label>
+       <textarea type="text" name="Description" id="Description" class="description" rows="4" cols="75" placeholder="entrer une description ici"></textarea>
+        
+        <div class="date">
+            <label for="date_debut">Date de debut de cour:<span class="sr-only"></span></label>
+            <input type="date" name="date" id="date_debut" />
+          </div>
+        <div>
+          <label >Entrer le nombre du cours 
+        <input id="nbr_cour" name="nbr_cour" type="text" required /></label>
+    </div>
+    <div>
+        <label for="first-name">Entrer le nombre de places maximale
+      <input id="nbr_places" name="nbr_places" type="number" min="1" required /></label>
+  </div>
+        </fieldset>
+        <input type="submit" value="Ajouter le cour" class="submit" id="Ajouter"/>
+
+      </form>
+
+      <section>
+        {{#each this.cours}}
+        <ul id="sport-list-admin">
+          <li>
+           
+             <div>
+            {{this.nom}}
+          </div>
+          <div>
+             {{this.description}}
+          </div>
+          <div>
+             {{this.capacite}}
+          </div>
+          <div>
+             {{this.nb_cours}}
+          </div>
+          <div>
+             {{this.date_debut}}
+          </div>
+          </li>
+             <div><button data-id="{{this.id_cours}}" class="btnDel">Delete</button></div>  
+¨                 
+          
+        </ul>
+        
+        {{/each}}
+        
+      </section> 
+
+      
