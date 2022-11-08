@@ -28,7 +28,7 @@ export const getCours = async () => {
             let connexion = await connectionPromise;
         
              await connexion.run(
-                `DELETE FROM cours WHERE id_cours=?;`,[id]
+                `DELETE FROM cours WHERE id_cours=?`,[id]
                 
             );
             

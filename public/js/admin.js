@@ -47,14 +47,19 @@ const addCours = async () => {
             });
     }
 
-   async function DeleteCours (id){
-   
+   async function DeleteCours (uid){
+   let data = {
+    id: Number(uid)
+   }
     let response = await fetch("/cours", {
       method: "DELETE",
-      body: JSON.stringify(id),
+      headers: {
+        'Content-Type': 'application/json',
+    },
+      body: JSON.stringify(data)
     });
    if (response.ok){
-//    location.reload();
+   location.reload();
    }
   }
 
