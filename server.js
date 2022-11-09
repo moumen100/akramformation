@@ -83,11 +83,47 @@ app.get('/inscription', async (request, response) => {
     response.render('inscription', {
         titre: 'inscription',
         styles: ['/css/style.css'],
-        scripts: ['/js/main.js'],
+        scripts: ['/js/inscription.js'],
         cours: await getCours(),
         
     });
 });
+
+app.get('/mesCours', async (request, response) => {
+    response.render('mescours', {
+        titre: 'Mes Cours',
+        styles: ['/css/style.css'],
+        scripts: ['/js/mescours.js'],
+        cours: await getcoursUtilisateurs(),
+        
+    });
+});
+// Requete post pour l'inscription à un cours
+app.post('/registerToCourse', async (request, response) => {
+    try {
+      // ajoute le cours courseID à l'utilisateur userID
+      let result = await addCourseToUser(request.body.cours_id, request.body.user_id);
+      // envoyer une réponse en cas de succès
+      if (result) {
+        response.json({ result: "OK" })
+      } else {
+        response.json({ result: "NOT_OK" })
+      }
+    } catch (err) {
+      // signaler une erreur lorsque l'insertion ou la connexion à la base de données échoue
+      response.json({ result: "ERROR" })
+    }
+  })
+
+  app.delete('/deregisterCourse', async (request, response) => {
+    console.log(request.body)
+    try {
+      await removeCourseFromUser(request.body.cours_id, request.body.user_id);
+      response.json({ result: "OK" })
+    } catch (err) {
+      response.json({ result: "ERROR" })
+    }
+  })
 
 
 // Renvoyer une erreur 404 pour les routes non définies

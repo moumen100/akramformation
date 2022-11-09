@@ -33,6 +33,19 @@ export const getCours = async () => {
             );
             
             }
+            export const getcoursUtilisateurs = async (idUser) => {
+                // Attendre que la connexion à la base de données
+                // soit établie
+                let connection = await connectionPromise;
+            
+                // Envoyer une requête à la base de données pour récupérer la liste des cours auquels l'utilisateur est inscrits
+                let results = await connection.all(
+                    'SELECT *, (SELECT COUNT(*) FROM cours_utilisateur AS A WHERE A.id_cours = C.id_cours) as registered FROM cours AS C WHERE id_cours IN (SELECT id_cours FROM cours_utilisateur WHERE id_utilisateur = ?)'
+                    , [idUser]);
+            
+                // Retourner les résultats
+                return results;
+            }
         
        
 
